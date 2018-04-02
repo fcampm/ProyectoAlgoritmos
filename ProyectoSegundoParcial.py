@@ -18,18 +18,7 @@ def menuPrincipal():
     print("| 3. Salir                      |")
     print(" =============================== ")
 
-def grafos():
-    menuGrafos()
-    opcionGrafos = int(input("Seleccione una opcion: "))
-    if opcionGrafos == 1:
-        algortimoBFS()
-    elif opcionGrafos == 2:
-        algoritmoDFS()
-    elif opcionGrafos == 3:
-        main()
-
 def menuGrafos():
-    #
     print(" ===================== ")
     print("| Algoritmo BFS y DFS |")
     print(" ===================== ")
@@ -38,18 +27,36 @@ def menuGrafos():
     print("| 3. Menu Principal   |")
     print(" ===================== ")
 
-#def menuNumeros():
+def grafos():
+    menuGrafos()
+    opcionGrafos = int(input("Seleccione una opcion: "))
+    if opcionGrafos == 1:
+        algortimoBFS()
+    elif opcionGrafos == 2:
+        algoritmoDFS()
+    elif opcionGrafos == 3:
+        return
+
+def algortimoBFS():
+
+
+def menuNumeros():
     #Lectura del txt
+    leeArchivo()
     #Determinar si esta ordenado o no
+    revisaLista()
     #Pedir numero al usuario
     #Escoger algoritmo, (ordenado-binary / desordenado-a escoger)
     #Mostrar dato buscado, numero de operaciones elementales, numero de casilla donde se ubico
 
-#def leeArchivo():
-#    lista = open("Datos.txt","r") as ListaNum
-#    reader = csv.reader(ListaNum)
-#    for line in reader:
-#       ListaNum.append(line)
+def leeArchivo():
+    lista = open("Datos.txt","r") as ListaNum
+    reader = csv.reader(ListaNum)
+    for line in reader:
+       ListaNum.append(line)
+
+#def revisaLista(lista):
+#
 
 def main():
     while(True):
@@ -64,6 +71,4 @@ def main():
             break
         else:
             print("No es una opcion valida")
-
-
 main()
