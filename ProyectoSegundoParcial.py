@@ -59,8 +59,9 @@ def main():
             menuNumeros()
         elif opcionMenuPrincipal == 2:
             grafos()
-        elif a == 3:
-            return
+        elif opcionMenuPrincipal == 3:
+            print("Gracias por su preferencia vuelva pronto :)")
+            break
         else:
             print("No es una opcion valida")
 
