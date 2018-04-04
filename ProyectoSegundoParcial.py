@@ -42,42 +42,33 @@ def grafos():
 
 def menuNumeros():
     #Lectura del txt
-    x = leeArchivo()
+    lista = leeArchivo()
     #Pedir numero al usuario y buscarlo / Algoritmo, (ordenado-binary / desordenado-a escoger)
-    buscaNumero(x)
-    #Salir o volver al menu principal
-    menuFinal()
-
-def buscaNumero(listaNum):
-    num = int(input("Numero a buscar: "))
-    if revisaLista(listaNum) == True:
+    num = buscaNumero()
+    #Revisa si la lista esta ordenada o no
+    check = revisaLista(lista)
+    #Seleccion de Algoritmo
+    if check == True:
         #Binary Search
-        binarySearch(listaNum, num)
+        binarySearch(lista, num)
     else:
         #Sequential Search
-        sequentialSearch(listaNum,num)
+        sequentialSearch(lista, num)
+    #Volver al menu principal
+    print("\n")
+    main()
 
-
-def menuFinal():
-    while (True):
-        print("1.- Si")
-        print("2.- No")
-        opcionFinal = int(input("Deseas volver al menu principal?: "))
-        if opcionFinal == 1:
-            main()
-        elif opcionFinal == 2:
-            print("Gracias por su preferencia, vuelva pronto :)")
-            break
-        else:
-            print("No es una opcion valida")
-        
+def buscaNumero():
+    num = int(input("Numero a buscar: "))
+    return num
+    
 
 def sequentialSearch(lista, num):
     i = 0
+    print("<SEQUENTIAL SEARCH>")
     while i < len(lista):
         if lista[i] == num:
-            print("El numero " + num + " se encontro en la posicion " + i +
-             " y se realizaron " + i + " pasos elementales, (comparaciones).")
+            print("El numero " + num + " se encontro en la posicion " + i +" y se realizaron " + i + " pasos elementales, (comparaciones).")
         else:
             i +=1
 
@@ -85,11 +76,12 @@ def binarySearch(lista, num):
     primer = 0
     ultimo = len(lista) - 1
     count = 0
+    print("<BINARY SEARCH>")
     while primer <= ultimo == True:
         i = (primer + ultimo) // 2
         if lista[i] == num == True:
-            print ("El numero " + num + " se encontro en la posicion " + i +
-                  " y se realizaron " + count + " pasos elementales, (comparaciones).")
+            print ("El numero " + num + " se encontro en la posicion " + i +" y se realizaron " + count + " pasos elementales, (comparaciones).")
+            return
         elif lista[i] > num == True:
             count +=1
             ultimo = i - 1
@@ -98,6 +90,7 @@ def binarySearch(lista, num):
             primer = i + 1
         else:
             print("El numero a buscar no se encuentra en la lista")
+            return
 
 def leeArchivo():
     listaNum = []
@@ -105,6 +98,7 @@ def leeArchivo():
         reader = csv.reader(Lista)
         for line in reader:
             listaNum.append(line)
+    print("Archivo Leido")
     return listaNum
 
 def revisaLista(lista):
