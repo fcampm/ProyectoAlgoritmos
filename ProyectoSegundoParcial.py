@@ -56,36 +56,36 @@ def menuNumeros():
         sequentialSearch(lista, num)
     #Volver al menu principal
     print("\n")
-    main()
+    return
 
 def buscaNumero():
     num = int(input("Numero a buscar: "))
     return num
-    
+
 
 def sequentialSearch(lista, num):
     i = 0
     print("<SEQUENTIAL SEARCH>")
-    while i < len(lista):
+    for i in range(len(lista)):
         if lista[i] == num:
-            print("El numero " + num + " se encontro en la posicion " + i +" y se realizaron " + i + " pasos elementales, (comparaciones).")
-        else:
-            i +=1
+            print("El numero " + str(num) + " se encontro en la posicion " + str(i+1) +" y se realizaron " + str(i+1) + " pasos elementales, (comparaciones).")
+            return
+    print("El numero " + str(num) + " no esta en la lista")
 
 def binarySearch(lista, num):
     primer = 0
     ultimo = len(lista) - 1
     count = 0
     print("<BINARY SEARCH>")
-    while primer <= ultimo == True:
+    while primer <= ultimo:
         i = (primer + ultimo) // 2
-        if lista[i] == num == True:
-            print ("El numero " + num + " se encontro en la posicion " + i +" y se realizaron " + count + " pasos elementales, (comparaciones).")
+        if lista[i] == num:
+            print ("El numero " + str(num) + " se encontro en la posicion " + str(i+1) +" y se realizaron " + str(count) + " pasos elementales, (comparaciones).")
             return
-        elif lista[i] > num == True:
+        elif lista[i] > num:
             count +=1
             ultimo = i - 1
-        elif lista[i] < num == True:
+        elif lista[i] < num:
             count +=1
             primer = i + 1
         else:
@@ -95,9 +95,9 @@ def binarySearch(lista, num):
 def leeArchivo():
     listaNum = []
     with open("Datos.txt") as Lista:
-        reader = csv.reader(Lista)
-        for line in reader:
-            listaNum.append(line)
+        #reader = csv.reader(Lista)
+        for line in Lista.read().split(","):
+            listaNum.append(int(line))
     print("Archivo Leido")
     return listaNum
 
