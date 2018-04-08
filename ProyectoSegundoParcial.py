@@ -168,7 +168,6 @@ def algoritmoBFS():
     elif(nodoInicio == 6):
         anchoPrimero(grafo, f, imprimir)
 
-
 def menuNumeros():
     #Lectura del txt
     lista = leeArchivo()
@@ -217,9 +216,8 @@ def binarySearch(lista, num):
         elif lista[i] < num:
             count +=1
             primer = i + 1
-        else:
-            print("El numero a buscar no se encuentra en la lista")
-            return
+    print("El numero " + str(num) + " no esta en la lista")
+    return
 
 def leeArchivo():
     listaNum = []
