@@ -22,8 +22,8 @@ def menuGrafos():
     print(" ===================== ")
     print("| Algoritmo BFS y DFS |")
     print(" ===================== ")
-    print("| 1. Algoritmo BFS    |")
-    print("| 2. Algoritmo DFS    |")
+    print("| 1. Algoritmo DFS    |")
+    print("| 2. Algoritmo BFS    |")
     print("| 3. Menu Principal   |")
     print(" ===================== ")
 
@@ -31,13 +31,142 @@ def grafos():
     menuGrafos()
     opcionGrafos = int(input("Seleccione una opcion: "))
     if opcionGrafos == 1:
-        algortimoBFS()
+        algortimoDFS()
     elif opcionGrafos == 2:
-        algoritmoDFS()
+        algoritmoBFS()
     elif opcionGrafos == 3:
         return
 
-#def algortimoBFS():
+# Método para crear un grafo y meter información a los grafos
+# Bibliografía del código: https://sites.google.com/site/programacioniiuno/temario/unidad-5---grafos/algoritmos-de-bsquedas
+from collections import deque
+
+class Grafo(object):
+    def __init__(self):
+        self.relaciones = {}
+    def __str__(self):
+        return str(self.relaciones)
+
+def agregar(grafo, elemento):
+    grafo.relaciones.update({elemento:[]})
+
+def relacionar(grafo, elemento1, elemento2):
+    relacionarUnilateral(grafo, elemento1, elemento2)
+    relacionarUnilateral(grafo, elemento2, elemento1)
+
+def relacionarUnilateral(grafo, origen, destino):
+    grafo.relaciones[origen].append(destino)
+
+def profundidadPrimero(grafo, elementoInicial, funcion, elementosRecorridos = []):
+    if elementoInicial in elementosRecorridos:
+        return
+    funcion(elementoInicial)
+    elementosRecorridos.append(elementoInicial)
+    for vecino in grafo.relaciones[elementoInicial]:
+        profundidadPrimero(grafo, vecino, funcion, elementosRecorridos)
+
+def anchoPrimero(grafo, elementoInicial, funcion, cola = deque(), elementosRecorridos = []):
+    if not elementoInicial in elementosRecorridos:
+        funcion(elementoInicial)
+        elementosRecorridos.append(elementoInicial)
+        if(len(grafo.relaciones[elementoInicial]) > 0):
+            cola.extend(grafo.relaciones[elementoInicial])
+    if len(cola) != 0 :
+        anchoPrimero(grafo, cola.popleft(), funcion, cola, elementosRecorridos)
+
+
+
+def cargarGrafo():
+    listaGraph = []
+    with open("Graphs.txt") as Lista:
+        reader = csv.reader(Lista)
+        for line in reader:
+            listaGraph.append(line)
+    print("Archivo cargado")
+    return listaGraph
+
+def algortimoDFS():
+
+    a = 1
+    b = 2
+    c = 3
+    d = 4
+    e = 5
+    f = 6
+
+    grafo = Grafo()
+    agregar(grafo, a)
+    agregar(grafo, b)
+    agregar(grafo, c)
+    agregar(grafo, d)
+    agregar(grafo, e)
+    agregar(grafo, f)
+
+    relacionar(grafo, a, b)
+    relacionar(grafo, a, f)
+    relacionar(grafo, a, e)
+    relacionar(grafo, b, f)
+    relacionar(grafo, b, d)
+    relacionar(grafo, e, f)
+    relacionar(grafo, c, d)
+    relacionar(grafo, c, f)
+
+    nodoInicio = int(input("Seleccione el nodo de inicio: "))
+    if(nodoInicio == 1):
+        profundidadPrimero(grafo, a, imprimir)
+    elif(nodoInicio == 2):
+        profundidadPrimero(grafo, b, imprimir)
+    elif(nodoInicio == 3):
+        profundidadPrimero(grafo, c, imprimir)
+    elif(nodoInicio == 4):
+        profundidadPrimero(grafo, d, imprimir)
+    elif(nodoInicio == 5):
+        profundidadPrimero(grafo, e, imprimir)
+    elif(nodoInicio == 6):
+        profundidadPrimero(grafo, f, imprimir)
+
+def imprimir(elemento):
+    print (elemento)
+
+def algoritmoBFS():
+    a = 1
+    b = 2
+    c = 3
+    d = 4
+    e = 5
+    f = 6
+
+    grafo = Grafo()
+    agregar(grafo, a)
+    agregar(grafo, b)
+    agregar(grafo, c)
+    agregar(grafo, d)
+    agregar(grafo, e)
+    agregar(grafo, f)
+
+    relacionar(grafo, a, b)
+    relacionar(grafo, a, f)
+    relacionar(grafo, a, e)
+    relacionar(grafo, b, f)
+    relacionar(grafo, b, d)
+    relacionar(grafo, e, f)
+    relacionar(grafo, c, d)
+    relacionar(grafo, c, f)
+
+    nodoInicio = int(input("Seleccione el nodo de inicio: "))
+
+    if(nodoInicio == 1):
+        anchoPrimero(grafo, a, imprimir)
+    elif(nodoInicio == 2):
+        anchoPrimero(grafo, b, imprimir)
+    elif(nodoInicio == 3):
+        anchoPrimero(grafo, c, imprimir)
+    elif(nodoInicio == 4):
+        anchoPrimero(grafo, d, imprimir)
+    elif(nodoInicio == 5):
+        anchoPrimero(grafo, e, imprimir)
+    elif(nodoInicio == 6):
+        anchoPrimero(grafo, f, imprimir)
 
 
 def menuNumeros():
