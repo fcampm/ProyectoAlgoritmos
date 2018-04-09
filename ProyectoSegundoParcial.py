@@ -8,6 +8,8 @@
 import csv
 import math
 
+nodos = []
+
 def menuPrincipal():
     print(" =============================== ")
     print("| Menu Proyecto Segundo Parcial |")
@@ -77,96 +79,49 @@ def anchoPrimero(grafo, elementoInicial, funcion, cola = deque(), elementosRecor
 
 
 def cargarGrafo():
-    listaGraph = []
-    with open("Graphs.txt") as Lista:
-        reader = csv.reader(Lista)
-        for line in reader:
-            listaGraph.append(line)
-    print("Archivo cargado")
-    return listaGraph
+    numeroNodos = int(input("Digite el numero total de nodos: "))
+
+    for i in range(numeroNodos):
+        valorNodo = int(input("Introduzca el valor del nodo" + str(i+1) + " :" ))
+        nodos.append(valorNodo)
 
 def algortimoDFS():
 
-    a = 1
-    b = 2
-    c = 3
-    d = 4
-    e = 5
-    f = 6
+    cargarGrafo()
 
     grafo = Grafo()
-    agregar(grafo, a)
-    agregar(grafo, b)
-    agregar(grafo, c)
-    agregar(grafo, d)
-    agregar(grafo, e)
-    agregar(grafo, f)
+    for nodo in range(len(nodos)):
+        agregar(grafo, nodos[nodo])
 
-    relacionar(grafo, a, b)
-    relacionar(grafo, a, f)
-    relacionar(grafo, a, e)
-    relacionar(grafo, b, f)
-    relacionar(grafo, b, d)
-    relacionar(grafo, e, f)
-    relacionar(grafo, c, d)
-    relacionar(grafo, c, f)
+    relaciones = int(input("Introduzca el numero de relaciones del grafo: "))
+    for i in range(relaciones):
+        nodo1 = int(input("Digite nodo 1: "))
+        nodo2 = int(input("Digite nodo 2: "))
+        relacionar(grafo, nodo1, nodo2)
 
     nodoInicio = int(input("Seleccione el nodo de inicio: "))
-    if(nodoInicio == 1):
-        profundidadPrimero(grafo, a, imprimir)
-    elif(nodoInicio == 2):
-        profundidadPrimero(grafo, b, imprimir)
-    elif(nodoInicio == 3):
-        profundidadPrimero(grafo, c, imprimir)
-    elif(nodoInicio == 4):
-        profundidadPrimero(grafo, d, imprimir)
-    elif(nodoInicio == 5):
-        profundidadPrimero(grafo, e, imprimir)
-    elif(nodoInicio == 6):
-        profundidadPrimero(grafo, f, imprimir)
+    profundidadPrimero(grafo, nodoInicio, imprimir)
+
 
 def imprimir(elemento):
     print (elemento)
 
 def algoritmoBFS():
-    a = 1
-    b = 2
-    c = 3
-    d = 4
-    e = 5
-    f = 6
+
+    cargarGrafo()
 
     grafo = Grafo()
-    agregar(grafo, a)
-    agregar(grafo, b)
-    agregar(grafo, c)
-    agregar(grafo, d)
-    agregar(grafo, e)
-    agregar(grafo, f)
+    for nodo in range(len(nodos)):
+        agregar(grafo, nodos[nodo])
 
-    relacionar(grafo, a, b)
-    relacionar(grafo, a, f)
-    relacionar(grafo, a, e)
-    relacionar(grafo, b, f)
-    relacionar(grafo, b, d)
-    relacionar(grafo, e, f)
-    relacionar(grafo, c, d)
-    relacionar(grafo, c, f)
+    relaciones = int(input("Introduzca el numero de relaciones del grafo: "))
+    for i in range(relaciones):
+        nodo1 = int(input("Digite nodo 1: "))
+        nodo2 = int(input("Digite nodo 2: "))
+        relacionar(grafo, nodo1, nodo2)
 
     nodoInicio = int(input("Seleccione el nodo de inicio: "))
-
-    if(nodoInicio == 1):
-        anchoPrimero(grafo, a, imprimir)
-    elif(nodoInicio == 2):
-        anchoPrimero(grafo, b, imprimir)
-    elif(nodoInicio == 3):
-        anchoPrimero(grafo, c, imprimir)
-    elif(nodoInicio == 4):
-        anchoPrimero(grafo, d, imprimir)
-    elif(nodoInicio == 5):
-        anchoPrimero(grafo, e, imprimir)
-    elif(nodoInicio == 6):
-        anchoPrimero(grafo, f, imprimir)
+    anchoPrimero(grafo, nodoInicio, imprimir)
 
 def menuNumeros():
     #Lectura del txt
